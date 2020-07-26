@@ -9,25 +9,24 @@ fetch('words.txt')
         dataFromFile = data.split('\n');
     });
 
-
-function isContains(arr, elem) {
-    let result;
-    if (!elem) {
-        return "No data in input";
-    }
+function finder(arr, elem) {
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] === elem) {
-            result = `word "${elem}" found in "${i}" row. `;
-            for (let j = 0; j < 9; j++) {
-                if (arr[i + j + 1]) {
-                    result += `Similar words: <br> \n ${j + 2}: "${arr[i + j + 1]}" in "${i + j + 1}"`;
-                }
-            }
-            return result;
+            return renderAnswer(arr, i);
         }
     }
+    return `Not Found`;
 }
 
+function renderAnswer(arr, index) {
+    result = `1: word "${arr[index]}" found in "${index}" row. Similar words: `;
+    for (let j = 1; j < 9; j++) {
+        if (arr[index + j]) {
+            result += `<br> ${j + 1}: word  "${arr[index + j]}" in "${index + j}"`;
+        }
+    }
+    return result;
+}
 
 window.addEventListener("load", () => {
     document.getElementById("submit_data").addEventListener("click", onSubmit, false);
@@ -38,6 +37,5 @@ let onSubmit = function (event) {
     event.preventDefault();
     inputValue = document.querySelector("#input").value.toString().trim();
     let output_data = document.querySelector("#output>p");
-    output_data.innerHTML = isContains(dataFromFile, inputValue);
-
+    output_data.innerHTML = finder(dataFromFile, inputValue);
 };
