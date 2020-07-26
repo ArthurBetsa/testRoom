@@ -1,0 +1,53 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #d2d4d4;
+}
+
+.body_wrap {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+
+
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
+#input_data {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#input{
+    margin: auto;
+}
+
+#submit_data {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 110px;
+}
+
+#output {
+    text-align: center;
+      /*max-width: 50%;*/
+
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#output>p{
+    text-align: left;
+}
