@@ -11,12 +11,15 @@ fetch('words.txt')
     .then(() => {
 
         fillDataObj();
+        console.log(orderedData);
 
-for(i = 0; i <30; i++){
-    console.log(orderedData[alphabet[0]][i][0]);
-}
-console.log(orderedData);
-        
+        for (let key in orderedData) {
+            let b = orderedData[key].map((value, index) => {
+                return orderedData[key][index][0];
+            });
+        }
+;
+
     });
 
 function finder(arr, elem) {
@@ -57,11 +60,17 @@ let onSubmit = function (event) {
 
 
 function fillDataObj() {
+    let i = 0;
+    let others =[];
+    while (dataFromFile[i].toLowerCase() < "a"){
+        others.push(dataFromFile[i]);
+        i++;
+    }
+    orderedData["0"] = others;
     alphabet.map((value) => {
         orderedData[value] = arrDivider(divideByLetter(dataFromFile, value));
     })
 };
-
 
 
 function divideByLetter(undividedArr, letter) {
