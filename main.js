@@ -1,5 +1,6 @@
 let dataFromFile;
 let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+let orderedData = {};
 
 
 fetch('words.txt')
@@ -7,15 +8,15 @@ fetch('words.txt')
     .then(data => {
         dataFromFile = data.split('\n');
     })
-    .then(()=>{
+    .then(() => {
 
-        for(let i = 0; i<alphabet.length;i++){
-            // let getA = ;
-            GGG(fillByLetter(alphabet[i]), alphabet[i]);
-        }
+        fillDataObj();
 
-
-
+for(i = 0; i <30; i++){
+    console.log(orderedData[alphabet[0]][i][0]);
+}
+console.log(orderedData);
+        
     });
 
 function finder(arr, elem) {
@@ -54,21 +55,18 @@ let onSubmit = function (event) {
 
 };
 
-let orderedData = {};
 
 function fillDataObj() {
-    alphabet.map((value, index) => {
-        orderedData[alphabet[index]] = value;
+    alphabet.map((value) => {
+        orderedData[value] = arrDivider(divideByLetter(dataFromFile, value));
     })
 };
 
-fillDataObj();
 
 
-function fillByLetter(letter) {
+function divideByLetter(undividedArr, letter) {
     let arr = [];
-    dataFromFile.filter(value => value[0].toLowerCase() === letter ?
-        // arr.push(dataFromFile.indexOf(value))
+    undividedArr.filter(value => value[0].toLowerCase() === letter ?
         arr.push(value)
         : false
     );
@@ -76,17 +74,14 @@ function fillByLetter(letter) {
 };
 
 
-
-function GGG(arr, letter) {
-    orderedData[letter]={};
+function arrDivider(arr) {
+    let dividedArr = [];
     let size = 1000; //размер подмассива
     for (let i = 0; i < Math.ceil(arr.length / size); i++) {
-        orderedData[letter][i] = arr.slice((i * size), (i * size) + size);
-
-
-
+        dividedArr[i] = arr.slice((i * size), (i * size) + size);
     }
-
+    return dividedArr;
 }
 
-console.log(orderedData);
+
+
