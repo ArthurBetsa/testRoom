@@ -7,16 +7,20 @@ fetch('words.txt')
     .then(response => response.text())
     .then(data => {
         dataFromFile = data.split('\n');
+        fillDataObj();
+
+
     })
     .then(() => {
 
-        fillDataObj();
+        // console.log(orderedData);
 
-for(i = 0; i <30; i++){
-    console.log(orderedData[alphabet[0]][i][0]);
-}
-console.log(orderedData);
-        
+        for (let kay in orderedData){
+            console.log(orderedData[kay]);
+        }
+
+         // console.log(orderedData["a"]["0"]["words"].map(value => dataFromFile.indexOf(value)));
+
     });
 
 function finder(arr, elem) {
@@ -63,7 +67,6 @@ function fillDataObj() {
 };
 
 
-
 function divideByLetter(undividedArr, letter) {
     let arr = [];
     undividedArr.filter(value => value[0].toLowerCase() === letter ?
@@ -74,12 +77,20 @@ function divideByLetter(undividedArr, letter) {
 };
 
 
-function arrDivider(arr) {
-    let dividedArr = [];
+function arrDivider(arrSortetByLetter) {
+    let dividedArr = {};
+    let fluentArr =[];
     let size = 1000; //размер подмассива
-    for (let i = 0; i < Math.ceil(arr.length / size); i++) {
-        dividedArr[i] = arr.slice((i * size), (i * size) + size);
+    for (let i = 0; i < Math.ceil(arrSortetByLetter.length / size); i++) {
+
+        dividedArr[i] = {
+            words: arrSortetByLetter.slice((i * size), (i * size) + size),
+            title: arrSortetByLetter[i * size],
+        };
+        // fluentArr = dividedArr[i]["words"].map(value => dataFromFile.indexOf(value));
+        // dividedArr[i]["indexes"] = fluentArr;
     }
+
     return dividedArr;
 }
 
