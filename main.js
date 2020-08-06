@@ -3,26 +3,23 @@
 let dataFromFile;
 let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 let orderedData = {};
-let orderedDataString = {};
+// let orderedDataString = {};
 
 
 fetch('words.txt')
     .then(response => response.text())
     .then(data => {
-        dataFromFile = data.split('\n').sort();
-        dataFromFile = dataFromFile.sort((a,b)=>a-b?-1:1);
+        dataFromFile = data.split('\n');
+        dataFromFile.sort(/* хуй знает что сюда писать, что бы оно работало как нужно*/);
+        /// Я в душе не ебу, как его правильно сортировать, что бы слова вроде ('midst) и (Y-chromosome) стали на свои места
 
-
-        letterFinder(dataFromFile, alphabet);
         fillDataObj();
-
 
     })
     .then(() => {
 
+        // letterFinder(dataFromFile, alphabet);
 
-
-        // console.log(orderedDataString);
 
         console.log(orderedData);
         console.log(dataFromFile[199634]);
@@ -101,20 +98,20 @@ function renderAnswer(arr, index) {
 }
 
 
-function letterFinder(dataArr, ruleArr) {
-    let i = 0;
-    let letter = 0;
-    while (i < dataArr.length) {
-
-        if (dataArr[i][0].toLowerCase() === ruleArr[letter]) {
-            orderedDataString[letter] = {
-                words: dataArr[i],
-                index: i,
-            };
-            letter++;
-        }
-
-        i++;
-    }
-}
+// function letterFinder(dataArr, ruleArr) {
+//     let i = 0;
+//     let letter = 0;
+//     while (i < dataArr.length) {
+//
+//         if (dataArr[i][0].toLowerCase() === ruleArr[letter]) {
+//             orderedDataString[letter] = {
+//                 words: dataArr[i],
+//                 index: i,
+//             };
+//             letter++;
+//         }
+//
+//         i++;
+//     }
+// }
 
